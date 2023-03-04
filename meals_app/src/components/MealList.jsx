@@ -1,9 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import MealCard from "./MealCard";
 import { MealContext } from "../context/MealContext";
 
-function MealList() {
-  const { meal } = useContext(MealContext);
+
+function MealList({url}) {
+  const [meal, setMeal] = useState([]);
+  const fetchData = () => {
+    return fetch(url)
+      .then((response) => response.json())
+      .then((data) => setMeal(data.meals));
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   if (meal == null) {
     return <div className="text-white text-center text-xl font-bold mt-10 h-screen">No hay recetas con esta letra</div>;

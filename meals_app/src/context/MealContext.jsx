@@ -5,7 +5,7 @@ export const MealContext = createContext();
 export function MealContextProvider(props) {
   const [meal, setMeal] = useState([]);
   const fetchData = () => {
-    return fetch("https://www.themealdb.com/api/json/v1/1/search.php?f=s")
+    return fetch("https://www.themealdb.com/api/json/v1/1/search.php?f=")
       .then((response) => response.json())
       .then((data) => setMeal(data.meals));
   };

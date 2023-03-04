@@ -6,8 +6,6 @@ import { MealContextProvider } from "./context/MealContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <MealContextProvider>
-      <App />
-    </MealContextProvider> 
+      <App/>
   </React.StrictMode>
 );
