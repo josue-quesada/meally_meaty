@@ -1,24 +1,39 @@
-import {useState} from "react";
-import MealList from './MealList'
-
-var urlMeal = "www.themealdb.com/api/json/v1/1/search.php?s=";
+import { useState, useEffect } from "react";
+import MealCard from "./MealCard";
 
 function MealForm() {
-
-  const [name, setname] = useState("")
+  const [meal, setMeal] = useState([]);
+  const [search, setSearch] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    urlMeal = urlMeal+name;
-    <MealList url={urlMeal}/>
+    const URL = `https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`;
+    fetch(URL)
+      .then((response) => response.json())
+      .then((data) => setMeal(data.meals))
+      .then(setSearch(""));
   };
-
 
   return (
     <form onSubmit={handleSubmit}>
-      <input placeholder="Buscar una receta" 
-      onChange={(e) => setname(e.target.value)}/>
-      <button className="bg-gray-800 text-white rounded-md">Buscar</button>
+      <div className="gap-4">
+        <input
+        className="w-40 h-35 gap-5"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        placeholder="Buscar una receta"
+      />
+      <button className="bg-gray-800 text-white rounded-md mx-auto">
+        {" "}
+        Buscar{" "}
+      </button>
+      </div>
+      
+      <div className="grid grid-cols-4 gap-4">
+        {meal.map((mealObj) => (
+          <MealCard key={mealObj.idMeal} mealObj={mealObj} />
+        ))}
+      </div>
     </form>
   );
 }
