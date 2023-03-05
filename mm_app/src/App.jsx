@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import MealForm from '../../meals_app/src/components/MealForm'
+import MealForm from './components/MealForm'
 import './App.css'
 import {signInGoogle} from './Firebase'
 
