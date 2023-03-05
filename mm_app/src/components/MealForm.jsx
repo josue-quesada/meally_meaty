@@ -1,5 +1,6 @@
 import { useState} from "react";
 import MealCard from "./MealCard";
+import "./MealForm.css";
 
 function MealForm() {
   const [meal, setMeal] = useState([]);
@@ -28,7 +29,7 @@ function MealForm() {
       </button>
       </div>
       
-      <div>
+      <div className="mealContainer">
         {meal.map((mealObj) => (
           <MealCard mealObj={mealObj}/>
         ))}
