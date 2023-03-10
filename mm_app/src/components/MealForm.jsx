@@ -5,7 +5,6 @@ import "./MealForm.css";
 function MealForm() {
   const [meal, setMeal] = useState([]);
   const [search, setSearch] = useState("");
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const URL = `https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`;
@@ -14,6 +13,9 @@ function MealForm() {
       .then((data) => setMeal(data.meals))
       .then(setSearch(""));
   };
+  if (!meal) {
+    return <div>Cargando...</div>;
+  }
 
   return (
     <form onSubmit={handleSubmit}>
