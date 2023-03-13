@@ -1,7 +1,9 @@
 import "./MealCard.css";
+import { useState } from "react";
 
 
 function MealCard({ mealObj }) {
+  const [expanded, setExpanded] = useState(false);
   const { strMeal, strInstructions, strMealThumb } = mealObj;
   const ingredients = [];
   const measures = [];
@@ -33,14 +35,9 @@ function MealCard({ mealObj }) {
       </div>
     );
   };
-      
-  const handleClick = () => {
-    RecipeDetails(mealObj);
-    console.log(strMeal);
-  };
 
   return (
-    <div className="cardContainer" onClick={handleClick}>
+    <div className="cardContainer" onClick={() => setExpanded(!expanded)}>
       <div className="imageContainer">
         <img src={mealObj.strMealThumb} width = "50%"/>
       </div>
@@ -49,6 +46,7 @@ function MealCard({ mealObj }) {
           <h3>{mealObj.strMeal}</h3>
         </div>
       </div>
+      {expanded && RecipeDetails()}
     </div>
   );
 }
