@@ -1,10 +1,10 @@
 .cardContainer {
+    width: 17rem;
     padding: 1px;
-    margin: 3px;
+    margin: 1rem 1rem 1rem 1rem;
     border-radius: 15px;
     box-shadow: 0px 0px 10px -5px;
     background-color: darkslategrey;
-    font-palette:dark;
 }
 
 .cardContainer:hover {
@@ -24,13 +24,13 @@
 
 .meal-card-img {
     max-width: 100%;
-    height: 450px;
-    border-radius: 15px 15px 0 0;
+    height: 10rem;
+    width: 10rem;
+    border-radius: 5px 5px 5px 5px;
 }
 
 .cardContent {
     text-align: center;
     color: white;
     margin-top: 10px;
-    margin-left: 20px;
 }

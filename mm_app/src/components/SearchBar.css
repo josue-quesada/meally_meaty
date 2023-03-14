@@ -7,17 +7,19 @@
 .search-bar-title {
     display:flex;
     align-content:flex-start;
+    margin-left: 3rem;
 }
 
 .search-bar__input {
     flex: 1;
     border: none;
-    margin-left: 65rem;
+    margin-left: 40rem;
     font-size: 1rem;
 }
 
 .search-bar__button {
-    margin-right: 10rem;
+    float: right;
+    margin-right: 3rem;
     background-color: green;
     border: none;
     border-radius: 5px;
