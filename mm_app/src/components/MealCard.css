@@ -1,28 +1,36 @@
 .cardContainer {
-    padding-top: 8px;
-    width: 250px;
-    height: 200px;
-    margin: 25px;
-    box-shadow: 0px 0px 10px -5px;
+    padding: 1px;
+    margin: 3px;
     border-radius: 15px;
-  }
-  
-  .cardContainer:hover {
-    transform: scale(1.1);
+    box-shadow: 0px 0px 10px -5px;
+    background-color: darkslategrey;
+    font-palette:dark;
+}
+
+.cardContainer:hover {
+    transform: scale(1.01);
     box-shadow: 0px 0px 5px 0px;
     transition: 0.5s;
-  }
-  
-  .imageContainer{
-    margin: 1rem;
+}
+
+.mealName {
     text-align: center;
-  }
-  
-  .cardContent{
-    color: aliceblue;
-    margin: 1rem;
-  }
-  
-  .mealName{
+    margin-top: 10px;
+}
+
+.imageContainer {
     text-align: center;
-  }
+}
+
+.meal-card-img {
+    max-width: 100%;
+    height: 450px;
+    border-radius: 15px 15px 0 0;
+}
+
+.cardContent {
+    text-align: center;
+    color: white;
+    margin-top: 10px;
+    margin-left: 20px;
+}

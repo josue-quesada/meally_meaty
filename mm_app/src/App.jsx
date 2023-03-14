@@ -1,19 +1,20 @@
-import { useState } from 'react'
-import MealForm from './components/MealForm'
-import './App.css'
-import {signInGoogle} from './Firebase'
+import { useState } from 'react';
+import MealList from './components/MealList';
+import SearchBar from './components/SearchBar';
 
-
-/*
-*/
 function App() {
-  return (
-    <div className="App">
+    const [searchTerm, setSearchTerm] = useState('');
 
-      <MealForm/>
-      
-    </div>
-  )
+    const handleSearch = (searchTerm) => {
+        setSearchTerm(searchTerm);
+    };
+
+    return (
+        <div className="App">
+            <SearchBar onSearch={handleSearch} />
+            <MealList searchTerm={searchTerm} />
+        </div>
+    );
 }
 
-export default App
+export default App;

@@ -1,0 +1,23 @@
+.meal-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+    .meal-list > * {
+        width: calc(33.33% - 10px);
+        margin-bottom: 20px;
+    }
+
+@media (max-width: 768px) {
+    .meal-list > * {
+        width: calc(50% - 10px);
+    }
+}
+
+@media (max-width: 576px) {
+    .meal-list > * {
+        width: 450px;
+    }
+}

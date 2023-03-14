@@ -1,0 +1,29 @@
+.search-bar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.search-bar-title {
+    display:flex;
+    align-content:flex-start;
+}
+
+.search-bar__input {
+    flex: 1;
+    border: none;
+    margin-left: 65rem;
+    font-size: 1rem;
+}
+
+.search-bar__button {
+    margin-right: 10rem;
+    background-color: green;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 0.5rem 1rem;
+    margin-left: 0.5rem;
+    cursor: pointer;
+    transition: border-color 0.25s
+}

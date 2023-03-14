@@ -1,77 +1,100 @@
-import { useState} from "react";
-import MealCard from "./MealCard";
-import "./MealForm.css";
+import { useState } from "react";
 
-function MealForm() {
-  const [meal, setMeal] = useState([]);
-  const [search, setSearch] = useState("");
+function MealForm(mealObjt) {
+    const [mealName, setMealName] = useState("");
+    const [mealImage, setMealImage] = useState("");
+    const [ingredients, setIngredients] = useState([""]);
+    const [measures, setMeasures] = useState([""]);
+    const [instructions, setInstructions] = useState("");
 
-
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const URL1 = `https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`;
-    const URL2 = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${search}`;
-    const URL3 = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${search}`;
-
-    const fetchByName = () => {
-      return fetch(URL1)
-        .then(response => response.json());
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const mealData = {
+            mealName,
+            mealImage,
+            ingredients,
+            measures,
+            instructions,
+        };
+        mealObjt.onSubmit(mealData);
+        setMealName("");
+        setMealImage("");
+        setIngredients([""]);
+        setMeasures([""]);
+        setInstructions("");
     };
 
-    const fetchByIngredient = () => {
-      return fetch(URL2)
-        .then(response => response.json());
+    const handleIngredientChange = (index, event) => {
+        const newIngredients = [...ingredients];
+        newIngredients[index] = event.target.value;
+        setIngredients(newIngredients);
     };
 
-    const fetchByCountry = () => {
-      return fetch(URL3)
-        .then(response => response.json());
+    const handleMeasureChange = (index, event) => {
+        const newMeasures = [...measures];
+        newMeasures[index] = event.target.value;
+        setMeasures(newMeasures);
     };
 
-    Promise.all([fetchByName(), fetchByIngredient(), fetchByCountry()])
-    .then(data => {
-      if (data[0].meals != null && data[1].meals != null) {
-        const array = (data[0].meals).concat((data[1].meals).filter((item2) => !data[0].meals.find((item1) => item1.idMeal === item2.idMeal)))
-        setMeal([...array])
-      }
-      else if (data[0].meals != null && data[1].meals === null && data[2].meals === null) {
-        setMeal(...[data[0].meals])
-      }
-      else if (data[0].meals === null && data[1].meals != null && data[2].meals === null) {
-        setMeal(...[data[1].meals])
-      }
-      else {
-        setMeal(...[data[2].meals])
-      } 
-    })  
-    .then(setSearch("")); 
-  };
-  if (!meal) {
-    return <div>No se encontró la receta...</div>;
-  }
+    const handleAddIngredient = () => {
+        setIngredients([...ingredients, ""]);
+        setMeasures([...measures, ""]);
+    };
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <input
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        placeholder="Buscar una receta"
-      />
-      <button>
-        {" "}
-        Buscar{" "}
-      </button>
-      </div>
-      
-      <div className="mealContainer">
-        {meal.map((mealObj) => (
-          <MealCard key={mealObj.idMeal} mealObj={mealObj}/>
-        ))}
-      </div>
-    </form>
-  );
+    return (
+        <form onSubmit={handleSubmit}>
+            <div>
+                <label htmlFor="mealName">Meal Name:</label>
+                <input
+                    type="text"
+                    id="mealName"
+                    value={mealName}
+                    onChange={(event) => setMealName(event.target.value)}
+                />
+            </div>
+            <div>
+                <label htmlFor="mealImage">Meal Image:</label>
+                <input
+                    type="text"
+                    id="mealImage"
+                    value={mealImage}
+                    onChange={(event) => setMealImage(event.target.value)}
+                />
+            </div>
+            <div>
+                <label htmlFor="ingredients">Ingredients:</label>
+                <ul>
+                    {ingredients.map((ingredient, index) => (
+                        <li key={index}>
+                            <input
+                                type="text"
+                                value={ingredient}
+                                onChange={(event) => handleIngredientChange(index, event)}
+                            />
+                            <input
+                                type="text"
+                                value={measures[index]}
+                                onChange={(event) => handleMeasureChange(index, event)}
+                            />
+                        </li>
+                    ))}
+                </ul>
+                <button type="button" onClick={handleAddIngredient}>
+                    Add Ingredient
+                </button>
+            </div>
+            <div>
+                <label htmlFor="instructions">Instructions:</label>
+                <textarea
+                    id="instructions"
+                    value={instructions}
+                    onChange={(event) => setInstructions(event.target.value)}
+                ></textarea>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    );
 }
 
 export default MealForm;
+
