@@ -4,6 +4,7 @@ import SearchBar from './components/SearchBar';
 
 function App() {
     const [searchTerm, setSearchTerm] = useState('');
+    const [meals, setMeals] = useState([]);
 
     const handleSearch = (searchTerm) => {
         setSearchTerm(searchTerm);
@@ -11,8 +12,8 @@ function App() {
 
     return (
         <div className="App">
-            <SearchBar onSearch={handleSearch} />
-            <MealList searchTerm={searchTerm} />
+            <SearchBar meals = {meals} setMeals = {setMeals}/>
+            <MealList meals = {meals} setMeals = {setMeals} searchTerm={searchTerm} />
         </div>
     );
 }

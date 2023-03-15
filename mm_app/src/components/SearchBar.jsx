@@ -2,7 +2,7 @@ import { useState } from 'react';
 import MealCard from './MealCard';
 import './SearchBar.css';
 
-function SearchBar() {
+function SearchBar({meals, setMeals}) {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
 
@@ -24,7 +24,12 @@ function SearchBar() {
                     setSearchResults([]);
                 } else {
                     const combinedMeals = filteredData.reduce((meals, current) => meals.concat(current.meals), []);
-                    setSearchResults(combinedMeals);
+                    const filteredMeals = combinedMeals.filter(
+                        (obj, index) =>
+                          combinedMeals.findIndex((item) => item.strMeal === obj.strMeal) === index
+                      );
+                      console.log(filteredMeals);
+                    setSearchResults(filteredMeals);
                 }
             });
 
@@ -48,9 +53,7 @@ function SearchBar() {
             </form>
             {searchResults.length > 0 && (
                 <div className="search-results">
-                    {searchResults.map(meal => (
-                        <MealCard key={meal.idMeal} meal={meal} onClick={() => handleMealClick(meal)} />
-                    ))}
+                    {setMeals(searchResults)}
                 </div>
             )}
         </div>

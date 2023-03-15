@@ -2,21 +2,20 @@ import { useState, useEffect } from 'react';
 import MealCard from './MealCard';
 import "./MealList.css";
 
-const MealList = ({ searchTerm }) => {
-    const [meals, setMeals] = useState([]);
+const MealList = ({meals, setMeals}) => {
     const [loading, setLoading] = useState(true);
     const [selectedMeal, setSelectedMeal] = useState(null);
 
     useEffect(() => {
         async function fetchMeals() {
-            const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchTerm}`);
+            const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=`);
             const data = await response.json();
             setMeals(data.meals || []);
             setLoading(false);
         }
 
         fetchMeals();
-    }, [searchTerm]);
+    }, []);
 
     const handleMealClick = (meal) => {
         setSelectedMeal(meal);
@@ -28,15 +27,6 @@ const MealList = ({ searchTerm }) => {
 
     if (meals.length === 0) {
         return <div>No meals found.</div>;
-    }
-
-    if (selectedMeal) {
-        return (
-            <div className="meal-list">
-                <MealCard key={selectedMeal.idMeal} meal={selectedMeal} />
-                <button onClick={() => setSelectedMeal(null)}>Back to list</button>
-            </div>
-        );
     }
 
     return (
