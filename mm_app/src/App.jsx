@@ -13,7 +13,7 @@ function App() {
     return (
         <div className="App">
             <SearchBar meals = {meals} setMeals = {setMeals}/>
-            <MealList meals = {meals} setMeals = {setMeals} searchTerm={searchTerm} />
+            <MealList meals = {meals} setMeals = {setMeals}/>
         </div>
     );
 }

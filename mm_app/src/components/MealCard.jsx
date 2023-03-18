@@ -1,24 +1,29 @@
 import { useState } from 'react';
-import MealDetails from './MealDetails';
+import MealPopup from './MealPopup';
 import "./MealCard.css";
 
-const MealCard = ({ meal }) => {
-    const [showDetails, setShowDetails] = useState(false);
+const MealCard = ({ meal, setShowPopup, showPopup, setStyling, styling, setSelectedMeal}) => {
+   
 
     const handleClick = () => {
-        setShowDetails(true);
+        setSelectedMeal(meal)
+        setShowPopup(!showPopup)
+        // if(styling === null){
+        //     setStyling({ position: "fixed" });
+        // }else{
+        //     setStyling(null)
+        // }
     };
-// arriba del div
+
     return (
         <div className="cardContainer">
             <h2 className="mealName">{meal.strMeal}</h2>
             <div className="imageContainer">
-                <img className="meal-card-img" src={meal.strMealThumb} alt={meal.strMeal} onClick={handleClick}/>
+                <img className="meal-card-img" src={meal.strMealThumb} alt={meal.strMeal} />
             </div>
-            {/*{showDetails && <MealDetails mealId={meal.idMeal} onClose={() => setShowDetails(false)} />}*/}
             <div className="cardContent">
                 <p>{meal.strCategory} - {meal.strArea}</p>
-                
+                <button className='info-btn' onClick={handleClick}>Info</button>
             </div>
         </div>
     );

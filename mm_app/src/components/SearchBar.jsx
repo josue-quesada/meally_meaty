@@ -34,9 +34,6 @@ function SearchBar({meals, setMeals}) {
             });
 
     };
-    const handleMealClick = (meal) => {
-        setSelectedMeal(meal);
-    };
 
     return (
         <div className="search-bar">
