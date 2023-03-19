@@ -19,8 +19,37 @@
   border-radius: 15px;
 }
 
+.head_sup{
+  display: flex;
+}
+
 .header {
   display: flex;
+}
+
+.rating{
+  position: relative;
+  padding: 70px;
+}
+
+.in_rate{
+  width: 35px;
+  height: 25px;
+  padding: 5px;
+  border-radius: 4;
+}
+
+.btn_rate{
+  position: relative;
+  padding: 5px;
+  background-color: rgb(4, 50, 77);
+  left: 10px;
+}
+
+.calification{
+  display: flex;
+  position: relative;
+  padding: 60px;
 }
 
 .close-btn {

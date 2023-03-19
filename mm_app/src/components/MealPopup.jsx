@@ -1,9 +1,80 @@
 import React from "react";
 import "./MealPopup.css";
+import { db } from "../Firebase";
+import { collection, getDocs, addDoc } from "@firebase/firestore";
+import { useState, useEffect } from "react";
 
 function MealPopup(props) {
   const ingredients = [];
+  const checkVisit = false;
+  /**
+   * CALIFICACION DE RECETAS
+  */
+
+  // Conexion a la DB
+  const ratingsCollectionsRef = collection(db, "ratings");
+  
+  // CREATE vars
+  const [newRate, setNewRate] = useState(0);
+  let newName = "";
+
+  // READ vars
+  let ratingsPromedium=0;
+  const [ratings, setRatings] = useState([]);
+  let calification = 0;
+  var cont = null;
+  let rates = [cont];
+
+  //mostrando en consola el objeto
+    /*
+    ratings.map((rating) => {
+      console.log(rating.meal_name);
+      console.log(rating.stars);
+    })*/
+
+  useEffect(() => {
+    const getRatings = async () => {
+      //obtiene toda la info de la base de datos en un json
+      const data = await getDocs(ratingsCollectionsRef);
+      //filtra solo la data necesaria (los docs y el id)
+      setRatings(data.docs.map((doc) => ({ ...doc.data(), id : doc.id})));
+    };
+    getRatings();
+  }, []);
+
+  // READ ZONE
+  if (props.selectedMeal != null){
+    ratings.map((rating) => {
+      //console.log(pIdMeal, "=", rating.meal_id);
+      // si el id coincide suma su calificación y un contador para dividir entre la cantidad
+      if(rating.meal_id==props.selectedMeal.idMeal){
+        cont +=1;
+        console.log(rating.stars);
+        calification += parseInt(rating.stars);
+      }
+    })
+  };
+
+  // CREATE Zone
+  const createRate = async () => {
+    await addDoc(ratingsCollectionsRef, {meal_id: props.selectedMeal.idMeal, meal_name: newName, stars:newRate});
+  };
+
+  //matemática de sumatoriaDeCalificaciones/cantidad
+  //calification = calc(rates, checkVisit, calification);
+  console.log(rates);
+  ratingsPromedium = (calification/cont).toFixed(1);
+  console.log("cantidad->",cont);
+  console.log("sumatoria->",calification);
+  console.log("promedio->",ratingsPromedium);
+  
+  
+  /**
+   * FIN CALIFICACION DE RECETAS
+   */
+
   if (props.selectedMeal != null) {
+    newName = props.selectedMeal.strMeal;
     for (let i = 1; i <= 20; i++) {
       if (props.selectedMeal[`strIngredient${i}`]) {
         ingredients.push({
@@ -14,10 +85,12 @@ function MealPopup(props) {
         break;
       }
     }
-  }
+  };
 
+  
+  //console.log("id->", props.selectedMeal.idMeal);
+  //console.log("calification -> ", ratings);
   console.log(ingredients);
-
   const handleClick = () => {
     props.setTrigger(false);
   };
@@ -25,14 +98,30 @@ function MealPopup(props) {
   return props.trigger ? (
     <div className="popup">
       <div className="popup-inner">
-        <div className="header">
-          <div className="image-container">
-            <img className="image-card" src={props.selectedMeal.strMealThumb} />
-          </div>
-          <h1 className="title">{props.selectedMeal.strMeal}</h1>
-          <button className="close-btn" onClick={handleClick}>
-            X
-          </button>
+        <div className="head_sup">
+          <div className="header">
+              <div className="image-container">
+                <img className="image-card" src={props.selectedMeal.strMealThumb} />
+              </div>
+              <h1 className="title">{props.selectedMeal.strMeal}</h1>
+              <button className="close-btn" onClick={handleClick}>
+                X
+              </button>
+            </div>
+            <div className="calification">
+              <h3>Calificación de la receta: {ratingsPromedium}</h3>  
+            </div>
+            <div className="rating">
+              <input 
+                className="in_rate" 
+                type="number" 
+                min="1" max="5" 
+                placeholde="Rate..." 
+                onChange={(event) => {setNewRate(event.target.value)}}
+              />
+              <button className="btn_rate" onClick={createRate}>Calificar</button>
+            </div>
+            
         </div>
         <div className="meal-details-ingredients">
           <h3>Ingredients:</h3>
@@ -53,6 +142,21 @@ function MealPopup(props) {
   ) : (
     ""
   );
+}
+
+function calc(rates, chek, prom){
+  let calification = 0; 
+  if (chek!=true){
+    for(let i = 0; i <= rates.length; i++){
+      if(rates[i]!=null){
+        calification+=rates[i];
+      }
+      //rates[i]=0;
+    }
+    chek=true;
+    return calification;
+  }
+  return prom;
 }
 
 export default MealPopup;

@@ -8,7 +8,7 @@ const MealList = ({ meals, setMeals }) => {
   const [selectedMeal, setSelectedMeal] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
   const [styling, setStyling] = useState(null);
-
+  //crud();
   useEffect(() => {
     async function fetchMeals() {
       const response = await fetch(
@@ -18,7 +18,7 @@ const MealList = ({ meals, setMeals }) => {
       setMeals(data.meals || []);
       setLoading(false);
     }
-
+    
     fetchMeals();
   }, []);
 
