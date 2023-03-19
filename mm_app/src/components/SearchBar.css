@@ -2,12 +2,14 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    
 }
 
 .search-bar-title {
     display:flex;
     align-content:flex-start;
     margin-left: 3rem;
+    
 }
 
 .search-bar__input {
@@ -15,6 +17,7 @@
     border: none;
     margin-left: 40rem;
     font-size: 1rem;
+    background-color: rgb(97, 36, 36);
 }
 
 .search-bar__button {

@@ -4,8 +4,10 @@
     margin: 1rem 1rem 1rem 1rem;
     border-radius: 15px;
     box-shadow: 0px 0px 10px -5px;
-    background-color: darkslategrey;
+    /*background-color: rgb(170, 143, 126);*/
+    background-color: rgb(78, 32, 32);
 }
+
 
 .cardContainer:hover {
     transform: scale(1.01);

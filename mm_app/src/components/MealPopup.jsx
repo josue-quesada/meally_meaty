@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
 
 function MealPopup(props) {
   const ingredients = [];
-  const checkVisit = false;
   /**
    * CALIFICACION DE RECETAS
   */
@@ -23,15 +22,7 @@ function MealPopup(props) {
   const [ratings, setRatings] = useState([]);
   let calification = 0;
   var cont = null;
-  let rates = [cont];
-
-  //mostrando en consola el objeto
-    /*
-    ratings.map((rating) => {
-      console.log(rating.meal_name);
-      console.log(rating.stars);
-    })*/
-
+  
   useEffect(() => {
     const getRatings = async () => {
       //obtiene toda la info de la base de datos en un json
@@ -49,7 +40,7 @@ function MealPopup(props) {
       // si el id coincide suma su calificación y un contador para dividir entre la cantidad
       if(rating.meal_id==props.selectedMeal.idMeal){
         cont +=1;
-        console.log(rating.stars);
+        //console.log(rating.stars);
         calification += parseInt(rating.stars);
       }
     })
@@ -62,11 +53,12 @@ function MealPopup(props) {
 
   //matemática de sumatoriaDeCalificaciones/cantidad
   //calification = calc(rates, checkVisit, calification);
-  console.log(rates);
+  //console.log(rates);
+  //console.log("cantidad->",cont);
+  //console.log("sumatoria->",calification);
+  //console.log("promedio->",ratingsPromedium);
   ratingsPromedium = (calification/cont).toFixed(1);
-  console.log("cantidad->",cont);
-  console.log("sumatoria->",calification);
-  console.log("promedio->",ratingsPromedium);
+ 
   
   
   /**
@@ -96,7 +88,7 @@ function MealPopup(props) {
   };
 
   return props.trigger ? (
-    <div className="popup">
+    <div className="popup" style={{marginRight: 2 + 'em'}}>
       <div className="popup-inner">
         <div className="head_sup">
           <div className="header">
@@ -109,7 +101,7 @@ function MealPopup(props) {
               </button>
             </div>
             <div className="calification">
-              <h3>Calificación de la receta: {ratingsPromedium}</h3>  
+              <h3>Calificación de la receta: {ratingsPromedium.toString()}</h3>  
             </div>
             <div className="rating">
               <input 
@@ -142,21 +134,6 @@ function MealPopup(props) {
   ) : (
     ""
   );
-}
-
-function calc(rates, chek, prom){
-  let calification = 0; 
-  if (chek!=true){
-    for(let i = 0; i <= rates.length; i++){
-      if(rates[i]!=null){
-        calification+=rates[i];
-      }
-      //rates[i]=0;
-    }
-    chek=true;
-    return calification;
-  }
-  return prom;
 }
 
 export default MealPopup;
