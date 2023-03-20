@@ -3,6 +3,7 @@ import "./MealPopup.css";
 import { db } from "../Firebase";
 import { collection, getDocs, addDoc } from "@firebase/firestore";
 import { useState, useEffect } from "react";
+import {CommentList} from './CommentList'
 
 function MealPopup(props) {
   const ingredients = [];
@@ -49,6 +50,8 @@ function MealPopup(props) {
   // CREATE Zone
   const createRate = async () => {
     await addDoc(ratingsCollectionsRef, {meal_id: props.selectedMeal.idMeal, meal_name: newName, stars:newRate});
+    setRatings([...ratings, {meal_id: props.selectedMeal.idMeal, meal_name: newName, stars:newRate}]);
+    setNewRate(0);
   };
 
   //matemática de sumatoriaDeCalificaciones/cantidad
@@ -88,7 +91,7 @@ function MealPopup(props) {
   };
 
   return props.trigger ? (
-    <div className="popup" style={{marginRight: 2 + 'em'}}>
+    <div className="popup" >
       <div className="popup-inner">
         <div className="head_sup">
           <div className="header">
@@ -117,7 +120,7 @@ function MealPopup(props) {
         </div>
         <div className="meal-details-ingredients">
           <h3>Ingredients:</h3>
-          <ul>
+          <ul className="ingredient-grid">
             {ingredients.map((ingredient) => (
               <li key={ingredient.name}>
                 <span>{ingredient.name} - {ingredient.measure}</span>
@@ -129,6 +132,7 @@ function MealPopup(props) {
           <h3>Instructions:</h3>
           <p>{props.selectedMeal.strInstructions}</p>
         </div>
+        <CommentList componentId= {props.selectedMeal.idMeal} />
       </div>
     </div>
   ) : (

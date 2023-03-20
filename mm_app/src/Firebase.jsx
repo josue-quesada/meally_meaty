@@ -18,12 +18,14 @@ const provider = new GoogleAuthProvider();
 
 // Conexi�n a la DB de firebase
 export const db = getFirestore(app);
+export var username = "";
 
 export const signInGoogle = () => {
   signInWithPopup(auth, provider)
     .then((result) => {
         const name = result.user.displayName;
         const email = result.user.email;
+        username = name;
         
         console.log(name);
         localStorage.setItem("name", name);
