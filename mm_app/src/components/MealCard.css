@@ -3,15 +3,15 @@
     padding: 1px;
     margin: 1rem 1rem 1rem 1rem;
     border-radius: 15px;
-    box-shadow: 0px 0px 10px -5px;
+    box-shadow: 0px 0px 10px black;
     /*background-color: rgb(170, 143, 126);*/
     background-color: rgb(78, 32, 32);
 }
 
 
 .cardContainer:hover {
-    transform: scale(1.01);
-    box-shadow: 0px 0px 5px 0px;
+    transform: scale(1.03);
+    box-shadow: 0px 0px 10px black;
     transition: 0.5s;
 }
 

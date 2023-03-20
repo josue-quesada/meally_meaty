@@ -8,11 +8,11 @@ const MealCard = ({ meal, setShowPopup, showPopup, setStyling, styling, setSelec
     const handleClick = () => {
         setSelectedMeal(meal)
         setShowPopup(!showPopup)
-        if(styling === null){
-             setStyling({ position: "fixed" });
-         }else{
-            setStyling(null)
-         }
+        // if(styling === null){
+        //      setStyling({ position: "fixed" });
+        //  }else{
+        //     setStyling(null)
+        //  }
     };
 
     return (

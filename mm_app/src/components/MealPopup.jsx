@@ -88,7 +88,7 @@ function MealPopup(props) {
   };
 
   return props.trigger ? (
-    <div className="popup" style={{marginRight: 2 + 'em'}}>
+    <div className="popup" >
       <div className="popup-inner">
         <div className="head_sup">
           <div className="header">
@@ -117,7 +117,7 @@ function MealPopup(props) {
         </div>
         <div className="meal-details-ingredients">
           <h3>Ingredients:</h3>
-          <ul>
+          <ul className="ingredient-grid">
             {ingredients.map((ingredient) => (
               <li key={ingredient.name}>
                 <span>{ingredient.name} - {ingredient.measure}</span>

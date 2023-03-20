@@ -10,13 +10,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: auto;
 }
 
 .popup-inner {
   position: relative;
   padding: 32px;
-  max-height: fit-content;
+  max-height: 60rem;
+  max-width: 80rem;
   background-color: darkslategrey;
   border-radius: 15px;
 }
@@ -79,4 +79,13 @@
 
 .meal-details-instructions {
   max-width: 80rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: normal;
+  max-height: 15rem;
+}
+
+.ingredient-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr ;
 }
