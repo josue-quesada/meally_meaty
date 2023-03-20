@@ -18,7 +18,7 @@ const provider = new GoogleAuthProvider();
 
 // Conexi�n a la DB de firebase
 export const db = getFirestore(app);
-export var username = "";
+export var username = "Anonymous User";
 
 export const signInGoogle = () => {
   signInWithPopup(auth, provider)
