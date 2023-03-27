@@ -26,10 +26,6 @@ export const signInGoogle = () => {
         const name = result.user.displayName;
         const email = result.user.email;
         username = name;
-        
-        console.log(name);
-        localStorage.setItem("name", name);
-        localStorage.setItem("email", email);
     })
     .catch((error) => {
       console.log(error);

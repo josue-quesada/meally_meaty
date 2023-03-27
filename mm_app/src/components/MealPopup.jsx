@@ -61,6 +61,10 @@ function MealPopup(props) {
   //console.log("sumatoria->",calification);
   //console.log("promedio->",ratingsPromedium);
   ratingsPromedium = (calification/cont).toFixed(1);
+
+  if (isNaN(ratingsPromedium)) {
+    ratingsPromedium = "No ratings"
+  }
  
   
   

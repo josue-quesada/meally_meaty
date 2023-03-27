@@ -58,7 +58,7 @@ function SearchBar({ meals, setMeals }) {
         <button onClick={signInGoogle}>Sign in Google</button>
       </form>
       {searchResults.length > 0 && (
-        <div className="search-results">{setMeals(searchResults)}</div>
+        setMeals(searchResults)
       )}
     </div>
   );
